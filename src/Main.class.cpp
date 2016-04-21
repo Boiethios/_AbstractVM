@@ -41,6 +41,7 @@ std::cout << "Line [" << line << "]\n";
 int
 Main::run(void)
 {
+#if 0
 	while (*_input)
 	{
 		std::string		buff;
@@ -55,5 +56,14 @@ Main::run(void)
 		process_line(buff);
 	}
 	// Process stored infos
+#endif
+	_stack.push(IOperand::factory.createOperand(INT8, "42"));
+	_stack.push(IOperand::factory.createOperand(INT16, "10"));
+//	_stack.push(IOperand::factory.createOperand(INT32, "123098"));
+//	_stack.push(IOperand::factory.createOperand(FLOAT, ".000000000000000000000000001"));
+//	_stack.push(IOperand::factory.createOperand(DOUBLE, "42.42"));
+	_stack.dump();
+	_stack.mod();
+	_stack.dump();
 	return 0;
 }

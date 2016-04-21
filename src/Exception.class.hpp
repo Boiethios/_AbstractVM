@@ -5,6 +5,10 @@
 enum class Error
 {
 	DIV_ZERO,
+	POP_EMPTY_STACK,
+	ASSERT_EMPTY_STACK,
+	NON_PRINTABLE_TYPE,
+	MOD_ON_NON_INT,
 };
 
 class Exception : public std::runtime_error

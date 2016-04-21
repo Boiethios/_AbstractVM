@@ -3,6 +3,7 @@
 #include "IOperand.interface.hpp"
 #include "Exception.class.hpp"
 
+#include <iostream>
 static inline IOperand const *
 do_op(IOperand const & operand1, IOperand const & operand2, char op)
 {
@@ -10,7 +11,7 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 	double			result;
 	std::string		value;
 
-	// TODO: operation
+//std::cout << "DEBUG: " << operand1.toString() << " " << op << " " << operand2.toString() << "\n";
 	switch (op)
 	{
 		case '+':
@@ -30,27 +31,32 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 		case '%':
 			if (not operand2.toDouble())
 				throw (Exception(Error::DIV_ZERO));
-			result = 0.;
+			if (type >= FLOAT)
+				throw (Exception(Error::MOD_ON_NON_INT));
+			result = static_cast<int>(operand1.toDouble()) % static_cast<int>(operand2.toDouble());
 			break ;
-		default:
-			/* OOPS */
+		default: /* OOPS */
 			throw (Exception("Impossible error.")) ;
 	}
-	(void)result;
-	return IOperand::factory.createOperand(type, value);
+	if (type >= FLOAT)
+		return IOperand::factory.createOperand(type, std::to_string(result));
+	return IOperand::factory.createOperand(type, std::to_string(static_cast<int>(result)));
 }
 
 
 template<typename T>
 class Operand : public IOperand
 {
+	friend class OperandFactory;
+
 		T const					_value;
 
-	public:
+		/* Use OperandFactory to construct an Operand */
 		Operand(T value) : _value(value)
 		{
 		}
 
+	public:
 		~Operand(void) = default;
 		Operand(Operand const &) = default;
 		Operand & operator=(Operand const &) = default;
@@ -66,7 +72,7 @@ class Operand : public IOperand
 		getType(void) const;
 
 		std::string
-		str(void) const
+		toString(void) const
 		{
 			return std::to_string(_value);
 		}

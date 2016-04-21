@@ -15,6 +15,10 @@ int main(int argc, char *argv[])
 	{
 		std::cout << "Exception: " << e.what() << "\n";
 	}
+	catch (...)
+	{
+		std::cout << "OOPS !?!\n";
+	}
 
 	return -1;
 }

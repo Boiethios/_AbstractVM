@@ -4,6 +4,8 @@
 #include <string>
 #include <istream>
 
+#include "Stack.class.hpp"
+
 class Main
 {
 	public:
@@ -25,4 +27,5 @@ class Main
 	private:
 		std::vector<std::string>	_args;
 		std::istream				*_input = nullptr;
+		Stack						_stack;
 };

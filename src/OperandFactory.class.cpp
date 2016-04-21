@@ -1,7 +1,7 @@
 #include "OperandFactory.class.hpp"
 #include "Operand.template.hpp"
 
-# include <boost/lexical_cast.hpp>
+#include <boost/lexical_cast.hpp>
 
 OperandFactory::OperandFactory(void) :
 	_funcs{
@@ -18,7 +18,14 @@ OperandFactory::OperandFactory(void) :
 IOperand const *
 OperandFactory::createOperand(eOperandType type, std::string const & value) const
 {
-	return (this->*_funcs[type])(value);
+	try
+	{
+		return (this->*_funcs[type])(value);
+	}
+	catch (std::exception const &e)
+	{
+		throw Exception(e.what());
+	}
 }
 
 
