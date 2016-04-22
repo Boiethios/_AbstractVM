@@ -64,7 +64,7 @@ Parser::getOperand(Lexer & lexer)
 	Lexer::Token	token(lexer.token());
 	eOperandType	type(static_cast<eOperandType>(static_cast<int>(token.type) - 1));
 
-	if (type > DOUBLE)
+	if (type > Double)
 		throw Exception("Syntax error: Operand expected.");
 	return OperandFactory::Get().createOperand(type, token.value);;
 }

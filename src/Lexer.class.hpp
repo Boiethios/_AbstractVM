@@ -40,8 +40,8 @@ class Lexer
 		Lexer(void);
 
 		~Lexer(void) = default;
-		Lexer(Lexer const &) = default;
-		Lexer & operator=(Lexer const &) = default;
+		Lexer(Lexer const &) = delete;
+		Lexer & operator=(Lexer const &) = delete;
 
 		bool
 		addLine(std::string line);

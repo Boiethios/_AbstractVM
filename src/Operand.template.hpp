@@ -40,7 +40,7 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 		case '%':
 			if (not opToDouble(operand2))
 				throw (Exception(Error::DIV_ZERO));
-			if (type >= FLOAT)
+			if (type >= Float)
 				throw (Exception(Error::MOD_ON_NON_INT));
 			result = opToInt(operand1) % opToInt(operand2);
 			break ;
@@ -49,7 +49,7 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 	}
 	try
 	{
-		if (type >= FLOAT)
+		if (type >= Float)
 			return OperandFactory::Get().createOperand(type, std::to_string(result));
 		return OperandFactory::Get().createOperand(type, std::to_string(static_cast<int>(result)));
 	}

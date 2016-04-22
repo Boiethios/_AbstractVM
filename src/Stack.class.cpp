@@ -59,7 +59,7 @@ Stack::print(void) const
 {
 	if (this->empty())
 		throw Exception(Error::ASSERT_EMPTY_STACK);
-	if (this->front()->getType() != INT8)
+	if (this->front()->getType() != Int8)
 		throw Exception(Error::NON_PRINTABLE_TYPE);
 	std::cout << static_cast<char>(std::stoi(this->front()->toString()));
 }
