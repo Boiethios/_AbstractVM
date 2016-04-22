@@ -13,6 +13,8 @@ set(INC_LIST
 	src/eOperandType.enum.hpp
 	src/OperandFactory.class.hpp
 	src/Stack.class.hpp
+	src/Lexer.class.hpp
+	src/Parser.class.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST} ${INC_LIST})
