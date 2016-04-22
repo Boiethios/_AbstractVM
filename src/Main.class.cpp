@@ -36,20 +36,20 @@ int
 Main::run(void)
 {
 	bool	ok(true);
-	while (*_input)
+	while (_input->good())
 	{
 		std::string		buff;
 		std::getline(*_input, buff);
+		ok &= _lexer.addLine(buff);
 		if(_input == &std::cin)
 		{
 			if (not *_input)
 				throw Exception("End of stream (std::cin).");
-			if (buff[0] == ';' and buff[1] == ';')
-				break ;
+			if (buff.find(";;") != std::string::npos)
+				_input->setstate(std::ios_base::eofbit);
+			if (not ok)
+				return -2;
 		}
-		ok &= _lexer.addLine(buff);
-		if (not ok and _input == &std::cin)
-			return -2;
 	}
 	if (not ok)
 		return -2;
