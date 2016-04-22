@@ -23,9 +23,6 @@ class Main
 		int
 		run(void);
 
-		int
-		parse(void);
-
 	private:
 		std::vector<std::string>	_args;
 		std::istream			*_input = nullptr;
