@@ -44,7 +44,7 @@ Lexer::processToken(std::string & tok)
 bool
 Lexer::addLine(std::string line)
 {
-	std::regex_replace(line, _regex_commentary, "");
+	line = std::regex_replace(line, _regex_commentary, "");
 	for(char & c : line)
 		if (c == '\t') c = ' ';
 

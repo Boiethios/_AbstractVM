@@ -48,6 +48,8 @@ Main::run(void)
 				break ;
 		}
 		ok &= _lexer.addLine(buff);
+		if (not ok and _input == &std::cin)
+			return -2;
 	}
 	if (not ok)
 		return -2;

@@ -8,8 +8,6 @@
 class IOperand
 {
 	public:
-//		static OperandFactory		factory;
-
 		virtual int					getPrecision( void ) const = 0;
 		virtual eOperandType		getType( void ) const = 0;
 

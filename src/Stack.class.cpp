@@ -51,7 +51,7 @@ Stack::assert(IOperand const *operand) const
 		throw Exception(Error::ASSERT_EMPTY_STACK);
 	if (this->front()->toString() != operand->toString())
 		throw Exception(std::string("Assertion failed: ") + this->front()->toString()
-						+ "!=" + operand->toString());
+						+ " != " + operand->toString());
 }
 
 void

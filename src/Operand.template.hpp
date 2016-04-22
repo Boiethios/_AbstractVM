@@ -3,14 +3,13 @@
 #include "IOperand.interface.hpp"
 #include "Exception.class.hpp"
 
-#include <iostream>
-inline double
+static inline double
 opToDouble(IOperand const & op)
 {
 	return std::stod(op.toString());
 }
 
-inline int
+static inline int
 opToInt(IOperand const & op)
 {
 	return std::stoi(op.toString());
@@ -21,9 +20,7 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 {
 	eOperandType	type(std::max(operand1.getType(), operand2.getType()));
 	double			result;
-	std::string		value;
 
-//std::cout << "DEBUG: " << operand1.toString() << " " << op << " " << operand2.toString() << "\n";
 	switch (op)
 	{
 		case '+':
@@ -50,9 +47,24 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 		default: /* OOPS */
 			throw (Exception("Impossible error.")) ;
 	}
-	if (type >= FLOAT)
-		return OperandFactory::Get().createOperand(type, std::to_string(result));
-	return OperandFactory::Get().createOperand(type, std::to_string(static_cast<int>(result)));
+	try
+	{
+		if (type >= FLOAT)
+			return OperandFactory::Get().createOperand(type, std::to_string(result));
+		return OperandFactory::Get().createOperand(type, std::to_string(static_cast<int>(result)));
+	}
+	catch (std::exception const & e)
+	{
+		switch (op)
+		{
+			case '+': throw Exception(std::string("add: ") + e.what());
+			case '-': throw Exception(std::string("sub: ") + e.what());
+			case '*': throw Exception(std::string("mul: ") + e.what());
+			case '/': throw Exception(std::string("/: ") + e.what());
+			case '%': throw Exception(std::string("%: ") + e.what());
+			default: /* OOPS */ throw (e) ;
+		}
+	}
 }
 
 
