@@ -4,6 +4,18 @@
 #include "Exception.class.hpp"
 
 #include <iostream>
+inline double
+opToDouble(IOperand const & op)
+{
+	return std::stod(op.toString());
+}
+
+inline int
+opToInt(IOperand const & op)
+{
+	return std::stoi(op.toString());
+}
+
 static inline IOperand const *
 do_op(IOperand const & operand1, IOperand const & operand2, char op)
 {
@@ -15,25 +27,25 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 	switch (op)
 	{
 		case '+':
-			result = operand1.toDouble() + operand2.toDouble();
+			result = opToDouble(operand1) + opToDouble(operand2);
 			break ;
 		case '-':
-			result = operand1.toDouble() - operand2.toDouble();
+			result = opToDouble(operand1) - opToDouble(operand2);
 			break ;
 		case '*':
-			result = operand1.toDouble() * operand2.toDouble();
+			result = opToDouble(operand1) * opToDouble(operand2);
 			break ;
 		case '/':
-			if (not operand2.toDouble())
+			if (not opToDouble(operand2))
 				throw (Exception(Error::DIV_ZERO));
-			result = operand1.toDouble() / operand2.toDouble();
+			result = opToDouble(operand1) / opToDouble(operand2);
 			break ;
 		case '%':
-			if (not operand2.toDouble())
+			if (not opToDouble(operand2))
 				throw (Exception(Error::DIV_ZERO));
 			if (type >= FLOAT)
 				throw (Exception(Error::MOD_ON_NON_INT));
-			result = static_cast<int>(operand1.toDouble()) % static_cast<int>(operand2.toDouble());
+			result = opToInt(operand1) % opToInt(operand2);
 			break ;
 		default: /* OOPS */
 			throw (Exception("Impossible error.")) ;
@@ -97,11 +109,4 @@ class Operand : public IOperand
 		IOperand const *
 		operator %(IOperand const &rhs) const
 		{ return do_op(*this, rhs, '%'); }
-
-
-		double
-		toDouble(void) const
-		{
-			return static_cast<double>(_value);
-		}
 };

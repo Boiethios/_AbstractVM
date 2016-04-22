@@ -32,16 +32,9 @@ Main::process_args(void)
 		throw Exception("Invalid stream.");
 }
 
-void
-Main::process_line(std::string & line)
-{
-std::cout << "Line [" << line << "]\n";
-}
-
 int
 Main::run(void)
 {
-#if 0
 	while (*_input)
 	{
 		std::string		buff;
@@ -53,17 +46,9 @@ Main::run(void)
 			if (buff[0] == ';' and buff[1] == ';')
 				break ;
 		}
-		process_line(buff);
+		if (not _lexer.addLine(buff))
+			break ;
 	}
-	// Process stored infos
-#endif
-	_stack.push(IOperand::factory.createOperand(INT8, "42"));
-	_stack.push(IOperand::factory.createOperand(INT16, "10"));
-//	_stack.push(IOperand::factory.createOperand(INT32, "123098"));
-//	_stack.push(IOperand::factory.createOperand(FLOAT, ".000000000000000000000000001"));
-//	_stack.push(IOperand::factory.createOperand(DOUBLE, "42.42"));
-	_stack.dump();
-	_stack.mod();
-	_stack.dump();
+	// parse tokens
 	return 0;
 }

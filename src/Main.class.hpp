@@ -5,6 +5,7 @@
 #include <istream>
 
 #include "Stack.class.hpp"
+#include "Lexer.class.hpp"
 
 class Main
 {
@@ -18,9 +19,6 @@ class Main
 		void
 		process_args(void);
 
-		void
-		process_line(std::string & line);
-
 		int
 		run(void);
 
@@ -28,4 +26,5 @@ class Main
 		std::vector<std::string>	_args;
 		std::istream				*_input = nullptr;
 		Stack						_stack;
+		Lexer						_lexer;
 };
