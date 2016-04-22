@@ -19,7 +19,7 @@ static inline IOperand const *
 do_op(IOperand const & operand1, IOperand const & operand2, char op)
 {
 	eOperandType	type(std::max(operand1.getType(), operand2.getType()));
-	double			result;
+	double		result;
 
 	switch (op)
 	{
@@ -73,7 +73,7 @@ class Operand : public IOperand
 {
 	friend class OperandFactory;
 
-		T const					_value;
+		T const		_value;
 
 		/* Use OperandFactory to construct an Operand */
 		Operand(T value) : _value(value)

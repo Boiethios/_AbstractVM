@@ -23,7 +23,7 @@ Lexer::processToken(std::string & tok)
 	}
 
 	std::istringstream	il(tok);
-	std::string			tok_n;
+	std::string		tok_n;
 	std::getline(il, tok, '(');
 	std::getline(il, tok_n, ')');
 	for (; i ; --i)
@@ -48,9 +48,9 @@ Lexer::addLine(std::string line)
 	for(char & c : line)
 		if (c == '\t') c = ' ';
 
-	bool				ret(true);
+	bool			ret(true);
 	std::istringstream	il(line);
-	std::string			tok;
+	std::string		tok;
 	while (std::getline(il, tok, ' '))
 	{
 		if (tok.empty())

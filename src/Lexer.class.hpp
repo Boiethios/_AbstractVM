@@ -32,7 +32,7 @@ class Lexer
 			};
 
 			Type		type;
-			std::string value;
+			std::string	value;
 		};
 
 		typedef Token::Type Type;
@@ -53,9 +53,9 @@ class Lexer
 		bool
 		processToken(std::string & token);
 
-		std::queue<Token>	_tokens;
+		std::queue<Token>			_tokens;
 
-		std::regex const	_regex_commentary;
+		std::regex const			_regex_commentary;
 
 		static std::vector<std::string> const	ops;
 };

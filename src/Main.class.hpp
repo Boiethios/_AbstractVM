@@ -28,8 +28,8 @@ class Main
 
 	private:
 		std::vector<std::string>	_args;
-		std::istream				*_input = nullptr;
-		Stack						_stack;
-		Lexer						_lexer;
-		Parser						_parser;
+		std::istream			*_input = nullptr;
+		Stack				_stack;
+		Lexer				_lexer;
+		Parser				_parser;
 };
