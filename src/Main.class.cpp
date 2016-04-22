@@ -35,6 +35,7 @@ Main::process_args(void)
 int
 Main::run(void)
 {
+	bool	ok(true);
 	while (*_input)
 	{
 		std::string		buff;
@@ -46,9 +47,9 @@ Main::run(void)
 			if (buff[0] == ';' and buff[1] == ';')
 				break ;
 		}
-		if (not _lexer.addLine(buff))
-			break ;
+		ok &= _lexer.addLine(buff);
 	}
-	// parse tokens
-	return 0;
+	if (not ok)
+		return -2;
+	return _parser(_lexer, _stack);
 }

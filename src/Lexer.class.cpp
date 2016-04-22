@@ -13,11 +13,11 @@ bool
 Lexer::processToken(std::string & tok)
 {
 	std::size_t	i;
-	for (i = 1 ; i < ops.size() - 5 ; ++i)
+	for (i = ops.size() - 1 ; i > 5 ; --i)
 	{
 		if (tok == ops[i])
 		{
-			_tokens.push({(Type)i, ""});
+			_tokens.push({static_cast<Type>(i), ""});
 			return true;
 		}
 	}
@@ -26,11 +26,11 @@ Lexer::processToken(std::string & tok)
 	std::string			tok_n;
 	std::getline(il, tok, '(');
 	std::getline(il, tok_n, ')');
-	for (; i < ops.size() ; ++i)
+	for (; i ; --i)
 	{
 		if (tok == ops[i])
 		{
-			_tokens.push({(Type)i, tok_n});
+			_tokens.push({static_cast<Type>(i), tok_n});
 			std::getline(il, tok);
 			if (not tok.empty())
 				break ;
@@ -64,11 +64,20 @@ Lexer::addLine(std::string line)
 Lexer::Token
 Lexer::token(void)
 {
-	return Token();
+	if (_tokens.empty())
+		return {Type::END_OF_STREAM, ""};
+	Token	token(_tokens.front());
+	_tokens.pop();
+	return Token(token);
 }
 
 std::vector<std::string> const	Lexer::ops {
 	"",
+	"int8",
+	"int16",
+	"int32",
+	"float",
+	"double",
 	"push",
 	"pop",
 	"dump",
@@ -80,10 +89,5 @@ std::vector<std::string> const	Lexer::ops {
 	"mod",
 	"print",
 	"exit",
-	"int8",
-	"int16",
-	"int32",
-	"float",
-	"double",
 };
 

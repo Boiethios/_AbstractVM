@@ -3,6 +3,15 @@
 
 #include <boost/lexical_cast.hpp>
 
+OperandFactory const &
+OperandFactory::Get(void)
+{
+	static OperandFactory _instance;
+
+	return _instance;
+}
+
+
 OperandFactory::OperandFactory(void) :
 	_funcs{
 		&OperandFactory::createInt8,

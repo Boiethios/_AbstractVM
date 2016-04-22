@@ -13,6 +13,11 @@ class Lexer
 			enum class Type
 			{
 				END_OF_STREAM,
+				INT8,
+				INT16,
+				INT32,
+				FLOAT,
+				DOUBLE,
 				PUSH,
 				POP,
 				DUMP,
@@ -24,11 +29,6 @@ class Lexer
 				MOD,
 				PRINT,
 				EXIT,
-				INT8,
-				INT16,
-				INT32,
-				FLOAT,
-				DOUBLE,
 			};
 
 			Type		type;

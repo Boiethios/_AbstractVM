@@ -1,8 +1,5 @@
 #include "Operand.template.hpp"
 
-OperandFactory IOperand::factory;
-
-
 template<>
 eOperandType Operand<int8_t>::getType(void) const
 {return INT8;}

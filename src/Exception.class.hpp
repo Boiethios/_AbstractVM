@@ -9,6 +9,7 @@ enum class Error
 	ASSERT_EMPTY_STACK,
 	NON_PRINTABLE_TYPE,
 	MOD_ON_NON_INT,
+	NO_EXIT,
 };
 
 class Exception : public std::runtime_error

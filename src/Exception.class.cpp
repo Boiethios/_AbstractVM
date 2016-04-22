@@ -23,7 +23,9 @@ Exception::constructor(Error err)
 		case Error::NON_PRINTABLE_TYPE:
 			return "The type is non printable.";
 		case Error::MOD_ON_NON_INT:
-			return "Modulo on non integer types";
+			return "Modulo on non integer types.";
+		case Error::NO_EXIT:
+			return "No exit instruction encoutered.";
 	}
 	return "";
 }

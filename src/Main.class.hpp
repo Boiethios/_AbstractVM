@@ -6,6 +6,7 @@
 
 #include "Stack.class.hpp"
 #include "Lexer.class.hpp"
+#include "Parser.class.hpp"
 
 class Main
 {
@@ -22,9 +23,13 @@ class Main
 		int
 		run(void);
 
+		int
+		parse(void);
+
 	private:
 		std::vector<std::string>	_args;
 		std::istream				*_input = nullptr;
 		Stack						_stack;
 		Lexer						_lexer;
+		Parser						_parser;
 };

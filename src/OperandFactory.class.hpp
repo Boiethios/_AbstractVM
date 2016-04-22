@@ -8,8 +8,11 @@ class IOperand;
 
 class OperandFactory
 {
-	public:
 		OperandFactory(void);
+
+	public:
+		static OperandFactory const &
+		Get(void);
 
 		~OperandFactory(void) = default;
 		OperandFactory(OperandFactory const &) = delete;

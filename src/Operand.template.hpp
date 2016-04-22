@@ -51,8 +51,8 @@ do_op(IOperand const & operand1, IOperand const & operand2, char op)
 			throw (Exception("Impossible error.")) ;
 	}
 	if (type >= FLOAT)
-		return IOperand::factory.createOperand(type, std::to_string(result));
-	return IOperand::factory.createOperand(type, std::to_string(static_cast<int>(result)));
+		return OperandFactory::Get().createOperand(type, std::to_string(result));
+	return OperandFactory::Get().createOperand(type, std::to_string(static_cast<int>(result)));
 }
 
 
