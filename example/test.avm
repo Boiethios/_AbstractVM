@@ -1,0 +1,12 @@
+push	 int8(123)		 push  
+int32(420000) 	
+	dump 
+ push	 double(42.42)  
+ 	push	 int8(44)	
+ 	push	 int8(64)	
+dump		  
+	print
+add
+	dump
+	print
+	exit

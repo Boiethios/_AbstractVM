@@ -10,14 +10,14 @@ Lexer::Lexer(void) :
 
 
 bool
-Lexer::processToken(std::string & tok)
+Lexer::processToken(std::string & tok, std::size_t n_line)
 {
 	std::size_t	i;
 	for (i = ops.size() - 1 ; i > 5 ; --i)
 	{
 		if (tok == ops[i])
 		{
-			_tokens.push({static_cast<Type>(i), ""});
+			_tokens.push({static_cast<Type>(i), "", n_line});
 			return true;
 		}
 	}
@@ -30,7 +30,7 @@ Lexer::processToken(std::string & tok)
 	{
 		if (tok == ops[i])
 		{
-			_tokens.push({static_cast<Type>(i), tok_n});
+			_tokens.push({static_cast<Type>(i), tok_n, n_line});
 			std::getline(il, tok);
 			if (not tok.empty())
 				break ;
@@ -42,7 +42,7 @@ Lexer::processToken(std::string & tok)
 }
 
 bool
-Lexer::addLine(std::string line)
+Lexer::addLine(std::string line, std::size_t n_line)
 {
 	line = std::regex_replace(line, _regex_commentary, "");
 	for(char & c : line)
@@ -55,17 +55,23 @@ Lexer::addLine(std::string line)
 	{
 		if (tok.empty())
 			continue ;
-		if (not processToken(tok))
+		if (not processToken(tok, n_line))
 			ret = false;
 	}
 	return ret;
+}
+
+void
+Lexer::addToken(Lexer::Token tok)
+{
+	_tokens.push(tok);
 }
 
 Lexer::Token
 Lexer::token(void)
 {
 	if (_tokens.empty())
-		return {Type::END_OF_STREAM, ""};
+		return {Type::END_OF_STREAM, "", static_cast<std::size_t>(-1)};
 	Token	token(_tokens.front());
 	_tokens.pop();
 	return Token(token);

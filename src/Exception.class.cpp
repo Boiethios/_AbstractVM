@@ -24,8 +24,8 @@ Exception::constructor(Error err)
 			return "The type is non printable.";
 		case Error::MOD_ON_NON_INT:
 			return "Modulo on non integer types.";
-		case Error::NO_EXIT:
-			return "No exit instruction encoutered.";
+		case Error::SYNTAX_ERROR:
+			return "Some syntax error occured, no execution.";
 	}
 	return "";
 }

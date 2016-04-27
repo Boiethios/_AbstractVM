@@ -33,6 +33,7 @@ class Lexer
 
 			Type		type;
 			std::string	value;
+			std::size_t	line;
 		};
 
 		typedef Token::Type Type;
@@ -44,14 +45,17 @@ class Lexer
 		Lexer & operator=(Lexer const &) = delete;
 
 		bool
-		addLine(std::string line);
+		addLine(std::string line, std::size_t n_line);
+
+		void
+		addToken(Lexer::Token tok);
 
 		Lexer::Token
 		token(void);
 
 	private:
 		bool
-		processToken(std::string & token);
+		processToken(std::string & token, std::size_t n_line);
 
 		std::queue<Token>			_tokens;
 

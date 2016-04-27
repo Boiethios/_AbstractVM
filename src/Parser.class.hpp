@@ -15,6 +15,9 @@ class Parser
 		operator()(Lexer & lexer, Stack & stack);
 
 	private:
+		void
+		check_syntax(Lexer & lexer, Lexer & new_lexer);
+
 		IOperand const *
 		getOperand(Lexer & lexer);
 };

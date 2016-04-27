@@ -35,12 +35,13 @@ Main::process_args(void)
 int
 Main::run(void)
 {
-	bool	ok(true);
+	std::size_t	n_line(0);
+	bool		ok(true);
 	while (_input->good())
 	{
 		std::string		buff;
 		std::getline(*_input, buff);
-		ok &= _lexer.addLine(buff);
+		ok &= _lexer.addLine(buff, ++n_line);
 		if(_input == &std::cin)
 		{
 			if (not *_input)
@@ -53,5 +54,6 @@ Main::run(void)
 	}
 	if (not ok)
 		return -2;
+
 	return _parser(_lexer, _stack);
 }
