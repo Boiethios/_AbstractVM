@@ -12,4 +12,3 @@ pop
 assert double(42.42) ; first assert
 assert double(42) ; bad assert
 exit
-toto

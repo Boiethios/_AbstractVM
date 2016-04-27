@@ -37,7 +37,7 @@ Lexer::processToken(std::string & tok, std::size_t n_line)
 			return true;
 		}
 	}
-	std::cout << "Invalid token: [" << tok << "]\n";
+	std::cout << "[" << n_line << "] Invalid token: [" << tok << "]\n";
 	return false;
 }
 
